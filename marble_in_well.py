@@ -11,7 +11,7 @@ pipex = np.linspace(-1,1,100)
 pipey = -(1-(pipex**2))**0.5
 plt.plot(pipex,pipey)
 
-def rk4(f,t,h,g,**kwargs):
+def rk4(f,t,h,g,**kwargs): #Define fourth order Runge Kutta sequence
     k1 = h*g(t,f,**kwargs)
     k2 = h*g(t+0.5*h, f+0.5*k1,**kwargs)
     k3 = h*g(t+0.5*h, f+0.5*k2,**kwargs)
@@ -19,7 +19,7 @@ def rk4(f,t,h,g,**kwargs):
     
     return f+ k1/6. + k2/3. + k3/3. + k4/6.
 
-def CircularHarmOsc(t,f):
+def CircularHarmOsc(t,f): # Define initial parameters such as gravity, and the physical coordinates of our system.
     x = f[0]
     v = f[1]
     gravity = 9.81
@@ -45,7 +45,7 @@ x = np.array(x)
 t = np.array(t)
 v = np.array(v)
 
-plt.figure()
+plt.figure() # Set up diagram
 plt.plot(t,x, label="Position")
 plt.plot(t,v, label="Velocity")
 plt.legend(loc = 'upper right')
@@ -63,12 +63,13 @@ def animate(i):
 
 y = -(1-(x**2))**0.5
 
+# set up Animation system
 anim = animation.FuncAnimation(
     fig, animate, interval=100, frames=len(t)-1)
 
 HTML(anim.to_html5_video())
 
-def DampCircularHarmOsc(t,f,beta = 0.1,gamma = 0.4):
+def DampCircularHarmOsc(t,f,beta = 0.1,gamma = 0.4): # Introduce oscillator with damping (resistive forces)
     x = f[0]
     v = f[1]
     gravity = 9.81
